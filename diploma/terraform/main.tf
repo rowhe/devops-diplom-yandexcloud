@@ -10,7 +10,7 @@ terraform {
 provider "yandex" {
   token		= var.yc_token
   cloud_id	= var.yc_cloud_id
-#  zone		= var.yc_region_a
+  zone		= var.yc_region_a
   folder_id	= var.yc_folder_id
 }
 
@@ -51,7 +51,6 @@ resource "yandex_compute_instance" "master" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet10_1.id
-
     nat       = true
   }
 
@@ -69,7 +68,6 @@ resource "yandex_compute_instance" "master" {
   count 	= local.instance[terraform.workspace]
 }
 
-
 locals {
   id = toset([
   "0",
@@ -78,10 +76,9 @@ locals {
   ])
 }
 
-
 resource "yandex_compute_instance" "node" {
 
-  for_each	= local.id
+  for_each	= locals.id
   name		= "node-${each.key}-${terraform.workspace}"
   
   lifecycle {
