@@ -78,7 +78,7 @@ locals {
 
 resource "yandex_compute_instance" "node" {
 
-  for_each	= locals.id
+  for_each	= local.id
   name		= "node-${each.key}-${terraform.workspace}"
   
   lifecycle {
