@@ -1,14 +1,19 @@
 # 1 Этап
 
-Создаю бэкэнд "diploma-yc" для хранения состояния инфраструктуры при помощи [Terraform Cloud](https://app.terraform.io/):
+1. Для дипломного проекта создаю репозиторий на [GitHub](https://github.com/rowhe/devops-diplom-yandexcloud.git) для хранения конфигурационных файлов `Terraform` и для удобства использования помещаю их в отдельную директорию `diploma/terraform` 
+
+
+2. Создаю бэкэнд "diploma-yc" для хранения состояния инфраструктуры при помощи [Terraform Cloud](https://app.terraform.io/):
 
 ![diploma-yc](img/img.png)
 
-Далее добавляю воркспейс "stage":
+3. Далее добавляю воркспейс "stage":
 
 ![ws_stage](img/img_1.png)
 
-Также добавляю необходимые переменные для подключения к YandexCloud:
+4. Также добавляю необходимые переменные для подключения к YandexCloud:
+
+![variables](img/img_2.png)
 
 
 
