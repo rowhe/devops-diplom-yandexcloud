@@ -55,7 +55,7 @@ resource "yandex_compute_instance" "master" {
   }
 
   metadata = {
-    ssh-keys = "${var.ssh_user}:${file("id_rsa.pub")}"
+    ssh-keys = "${var.ssh_user}:${file("./ssh/id_rsa.pub")}"
   }
 
 #  connection {
@@ -105,7 +105,7 @@ resource "yandex_compute_instance" "node" {
   }
   
   metadata = {
-    ssh-keys = "ubuntu:${file("id_rsa.pub")}"
+    ssh-keys = "ubuntu:${file("./ssh/id_rsa.pub")}"
   }
 
 }
