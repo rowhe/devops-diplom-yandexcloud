@@ -55,7 +55,7 @@ resource "yandex_compute_instance" "master" {
   }
 
   metadata = {
-    ssh-keys = "${var.ssh_user}:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "${var.ssh_user}:${file("./diploma/terraform/ssh/id_rsa.pub")}"
   }
 
 #  connection {
