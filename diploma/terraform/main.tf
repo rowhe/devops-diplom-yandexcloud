@@ -10,7 +10,7 @@ terraform {
 provider "yandex" {
   token		= var.yc_token
   cloud_id	= var.yc_cloud_id
-  zone		= var.yc_region
+#  zone		= var.yc_region_a
   folder_id	= var.yc_folder_id
 }
 
@@ -34,7 +34,8 @@ locals {
 
 resource "yandex_compute_instance" "master" {
   name = "cp-vm-${count.index}-${terraform.workspace}"
-  zone = "ru-central1-a"
+#  zone = "ru-central1-a"
+  zone = var.yc_region_a
 
   resources {
     cores  = 4
@@ -49,7 +50,7 @@ resource "yandex_compute_instance" "master" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet10.id
+    subnet_id = yandex_vpc_subnet.subnet10_1.id
 
     nat       = true
   }
@@ -100,7 +101,7 @@ resource "yandex_compute_instance" "node" {
   }
 
   network_interface {
-    subnet_id	= yandex_vpc_subnet.subnet10.id
+    subnet_id	= yandex_vpc_subnet.subnet10_1.id
     nat		= true
   }
   
@@ -111,14 +112,20 @@ resource "yandex_compute_instance" "node" {
 }
   
 
-resource "yandex_vpc_network" "test_network" {
-  name = "test-net"
+resource "yandex_vpc_network" "diploma_network" {
+  name = "diploma-net"
 }
 
-resource "yandex_vpc_subnet" "subnet10" {
-  v4_cidr_blocks = ["10.0.0.0/16"]
-  zone           = "ru-central1-a"
-  network_id     = "${yandex_vpc_network.test_network.id}"
+resource "yandex_vpc_subnet" "subnet10_1" {
+  v4_cidr_blocks = ["10.1.0.0/16"]
+  zone           = var.yc_region_a
+  network_id     = "${yandex_vpc_network.diploma_network.id}"
+}
+
+resource "yandex_vpc_subnet" "subnet10_1" {
+  v4_cidr_blocks = ["10.2.0.0/16"]
+  zone           = var.yc_region_b
+  network_id     = "${yandex_vpc_network.diploma_network.id}"
 }
 
 //// Create SA

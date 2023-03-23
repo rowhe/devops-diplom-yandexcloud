@@ -10,7 +10,11 @@ variable "yc_folder_id" {
   default = ""
 }
 
-variable "yc_region" {
+variable "yc_region_a" {
+  default = ""
+}
+
+variable "yc_region_b" {
   default = ""
 }
 
