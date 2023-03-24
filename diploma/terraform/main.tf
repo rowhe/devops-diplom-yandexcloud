@@ -14,7 +14,6 @@ provider "yandex" {
   folder_id	= var.yc_folder_id
 }
 
-
 resource "yandex_compute_image" "my_image" {
   description	= "Test image"
   source_family	= "ubuntu-2004-lts"
@@ -22,7 +21,6 @@ resource "yandex_compute_image" "my_image" {
   min_disk_size	= 10
   os_type	= "linux"
 }
-
 
 locals {
   instance = {
@@ -105,9 +103,7 @@ resource "yandex_compute_instance" "node" {
   metadata = {
     ssh-keys = "ubuntu:${file("./ssh/id_rsa.pub")}"
   }
-
 }
-  
 
 resource "yandex_vpc_network" "diploma_network" {
   name = "diploma-net"
