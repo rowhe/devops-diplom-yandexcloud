@@ -74,7 +74,7 @@ locals {
   ])
 }
 
-resource "yandex_compute_instance" "node" {
+resource "yandex_compute_instance" "node1" {
 
   for_each	= local.id
   name		= "node-${each.key}-${terraform.workspace}"
@@ -105,6 +105,32 @@ resource "yandex_compute_instance" "node" {
   }
 }
 
+resource "yandex_compute_instance" "node2" {
+  for_each = local.id
+  name = "node-${each.key}-${terraform.workspace}"
+
+  lifecycle {
+    create_before_destroy = true
+    }
+  resources {
+    cores = 2
+    memory = 4
+  }
+  boot_disk {
+    initialize_params {
+      image_id = "${yandex_compute_image.my_image.id}"
+      size = 50
+    }
+  }
+  network_interface {
+    subnet_id = "${yandex_vpc_subnet.subnet10_2.id}"
+    nat = true
+  }
+  metadata = {
+    ssh_keys = "ubuntu:${file(.ssh/id_rsa.pub)}"
+  }
+}
+
 resource "yandex_vpc_network" "diploma_network" {
   name = "diploma-net"
 }
@@ -121,29 +147,29 @@ resource "yandex_vpc_subnet" "subnet10_2" {
   network_id     = "${yandex_vpc_network.diploma_network.id}"
 }
 
-// Create SA
-resource "yandex_iam_service_account" "sa" {
-  folder_id = "${var.yc_folder_id}"
-  name      = "tf-test-sa"
-}
-
-// Grant permissions
-resource "yandex_resourcemanager_folder_iam_member" "sa-admin" {
-  folder_id = "${var.yc_folder_id}"
-  role      = "admin"
-//  role      = "storage.editor"
-  member    = "serviceAccount:${yandex_iam_service_account.sa.id}"
-}
-
-// Create Static Access Keys
-resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
-  service_account_id = yandex_iam_service_account.sa.id
-  description        = "static access key for object storage"
-}
-
-// Use keys to create bucket
-resource "yandex_storage_bucket" "diploma-bucket" {
-  access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
-  secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
-  bucket = "bigbucket"
-}
+//// Create SA
+//resource "yandex_iam_service_account" "sa" {
+//  folder_id = "${var.yc_folder_id}"
+//  name      = "tf-test-sa"
+//}
+//
+//// Grant permissions
+//resource "yandex_resourcemanager_folder_iam_member" "sa-admin" {
+//  folder_id = "${var.yc_folder_id}"
+//  role      = "admin"
+////  role      = "storage.editor"
+//  member    = "serviceAccount:${yandex_iam_service_account.sa.id}"
+//}
+//
+//// Create Static Access Keys
+//resource "yandex_iam_service_account_static_access_key" "sa-static-key" {
+//  service_account_id = yandex_iam_service_account.sa.id
+//  description        = "static access key for object storage"
+//}
+//
+//// Use keys to create bucket
+//resource "yandex_storage_bucket" "diploma-bucket" {
+//  access_key = yandex_iam_service_account_static_access_key.sa-static-key.access_key
+//  secret_key = yandex_iam_service_account_static_access_key.sa-static-key.secret_key
+//  bucket = "bigbucket"
+//}
