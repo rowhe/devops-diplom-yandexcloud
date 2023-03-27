@@ -83,7 +83,7 @@ resource "yandex_compute_instance" "master" {
 }
 
 locals {
-  id = toset([
+  id_1 = toset([
   "0",
   "1",
   "2",
@@ -92,7 +92,7 @@ locals {
 
 resource "yandex_compute_instance" "node1" {
 
-  for_each	= local.id
+  for_each	= local.id_1
   name		= "node-${each.key}-${terraform.workspace}"
   zone = var.yc_region_a
   
@@ -123,7 +123,7 @@ resource "yandex_compute_instance" "node1" {
 }
 
 locals {
-  id = toset([
+  id_2 = toset([
   "0",
   "1",
   "2",
@@ -131,7 +131,7 @@ locals {
 }
 
 resource "yandex_compute_instance" "node2" {
-  for_each = local.id
+  for_each = local.id_2
   name = "node-${each.key}-${terraform.workspace}"
   zone = var.yc_region_b
 
