@@ -122,6 +122,14 @@ resource "yandex_compute_instance" "node1" {
   }
 }
 
+locals {
+  id = toset([
+  "0",
+  "1",
+  "2",
+  ])
+}
+
 resource "yandex_compute_instance" "node2" {
   for_each = local.id
   name = "node-${each.key}-${terraform.workspace}"
