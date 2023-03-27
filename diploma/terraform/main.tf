@@ -47,7 +47,7 @@ locals {
 }
 
 resource "yandex_compute_instance" "master" {
-  name = "cp-vm-${count.index}-${terraform.workspace}"
+  name = "cp-${count.index}-${terraform.workspace}"
 #  zone = "ru-central1-a"
   zone = var.yc_region_a
 
@@ -94,6 +94,7 @@ resource "yandex_compute_instance" "node1" {
 
   for_each	= local.id
   name		= "node-${each.key}-${terraform.workspace}"
+  zone = var.yc_region_a
   
   lifecycle {
     create_before_destroy = true
@@ -124,6 +125,7 @@ resource "yandex_compute_instance" "node1" {
 resource "yandex_compute_instance" "node2" {
   for_each = local.id
   name = "node-${each.key}-${terraform.workspace}"
+  zone = var.yc_region_b
 
   lifecycle {
     create_before_destroy = true
