@@ -123,7 +123,7 @@ resource "yandex_compute_instance" "node2" {
     }
   }
   network_interface {
-    subnet_id = "${yandex_vpc_subnet.subnet10_2.id}"
+    subnet_id = yandex_vpc_subnet.subnet10_2.id
     nat = true
   }
   metadata = {
