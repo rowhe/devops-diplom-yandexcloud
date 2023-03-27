@@ -14,6 +14,22 @@ provider "yandex" {
   folder_id	= var.yc_folder_id
 }
 
+resource "yandex_vpc_network" "diploma_network" {
+  name = "diploma-net"
+}
+
+resource "yandex_vpc_subnet" "subnet10_1" {
+  v4_cidr_blocks = ["10.1.0.0/16"]
+  zone           = var.yc_region_a
+  network_id     = "${yandex_vpc_network.diploma_network.id}"
+}
+
+resource "yandex_vpc_subnet" "subnet10_2" {
+  v4_cidr_blocks = ["10.2.0.0/16"]
+  zone           = var.yc_region_b
+  network_id     = "${yandex_vpc_network.diploma_network.id}"
+}
+
 resource "yandex_compute_image" "my_image" {
   description	= "Test image"
   source_family	= "ubuntu-2004-lts"
@@ -96,7 +112,7 @@ resource "yandex_compute_instance" "node1" {
   }
 
   network_interface {
-    subnet_id	= yandex_vpc_subnet.subnet10_1.id
+    subnet_id = yandex_vpc_subnet.subnet10_1.id
     nat		= true
   }
   
@@ -131,21 +147,7 @@ resource "yandex_compute_instance" "node2" {
   }
 }
 
-resource "yandex_vpc_network" "diploma_network" {
-  name = "diploma-net"
-}
 
-resource "yandex_vpc_subnet" "subnet10_1" {
-  v4_cidr_blocks = ["10.1.0.0/16"]
-  zone           = var.yc_region_a
-  network_id     = "${yandex_vpc_network.diploma_network.id}"
-}
-
-resource "yandex_vpc_subnet" "subnet10_2" {
-  v4_cidr_blocks = ["10.2.0.0/16"]
-  zone           = var.yc_region_b
-  network_id     = "${yandex_vpc_network.diploma_network.id}"
-}
 
 //// Create SA
 //resource "yandex_iam_service_account" "sa" {
