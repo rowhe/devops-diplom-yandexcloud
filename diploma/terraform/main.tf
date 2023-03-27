@@ -127,7 +127,7 @@ resource "yandex_compute_instance" "node2" {
     nat = true
   }
   metadata = {
-    ssh_keys = "ubuntu:${file(.ssh/id_rsa.pub)}"
+    ssh_keys = "ubuntu:${file(".ssh/id_rsa.pub")}"
   }
 }
 
