@@ -84,9 +84,9 @@ resource "yandex_compute_instance" "master" {
 
 locals {
   id_1 = toset([
-  "0",
-  "1",
-  "2",
+  "a0",
+  "a1",
+  "a2",
   ])
 }
 
@@ -124,9 +124,9 @@ resource "yandex_compute_instance" "node1" {
 
 locals {
   id_2 = toset([
-  "0",
-  "1",
-  "2",
+  "b0",
+  "b1",
+  "b2",
   ])
 }
 
