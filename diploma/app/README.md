@@ -1,6 +1,6 @@
 ### Этап третий - подготовка тестового приложения
 
-1. Создаем [`Dockerfile`](docker/Dockerfile) с простой конфигураций сервера `nginx` отдающим статическую страницу
+1. Создаем [`Dockerfile`](docker/Dockerfile) с простой конфигураций сервера `nginx` отдающим статическую страницу c именем хоста(контейнера).
 
 ```text
 FROM nginx:alpine
@@ -45,7 +45,6 @@ Successfully tagged rowhe/nginx_static_idex:0.0.2
 ```
 
 
-
 ```shell
 $ docker push rowhe/nginx_static_index
 
@@ -62,31 +61,30 @@ d280bc8e13e2: Mounted from library/nginx
 0.0.2: digest: sha256:91efabe17ece024823f470e9d4e25eb0d53d5c0f0a7fc326e086176d0f6a6671 size: 2195
 ```
 
+3.1 Проверим, что образ загрузился на DockerHub
+
+![DockerHub](img/img.png)
+
+
 4. Запустим контейнер и проверим его работу
 
 ```shell
-docker run -d --rm -p 80:80 --name nginx rowhe/nginx_static_index:0.0.2 
+$ docker run -d --rm -p 80:80 --name nginx rowhe/nginx_static_index:0.0.2
+778777812dc6f19f22f1baa0cc192afb1dac22ba67cc093d18bffc580a7c55d1 
 ```
 
+5. Проверим работу сервера
+```shell
+$ curl localhost
 
+<html>
+<body>
+        <h1>Host: 778777812dc6</h1>
+        Version: 1.1
+</body>
+</html>
+```
 
+## Итог этапа - подготовлен сервер `nginx` показывающий статическую страницу
 
-
-
-
-### Создание тестового приложения
-
-Для перехода к следующему этапу необходимо подготовить тестовое приложение, эмулирующее основное приложение разрабатываемое вашей компанией.
-
-Способ подготовки:
-
-1. Рекомендуемый вариант:  
-   а. Создайте отдельный git репозиторий с простым nginx конфигом, который будет отдавать статические данные.  
-   б. Подготовьте Dockerfile для создания образа приложения.  
-2. Альтернативный вариант:  
-   а. Используйте любой другой код, главное, чтобы был самостоятельно создан Dockerfile.
-
-Ожидаемый результат:
-
-1. Git репозиторий с тестовым приложением и Dockerfile.
-2. Регистр с собранным docker image. В качестве регистра может быть DockerHub или [Yandex Container Registry](https://cloud.yandex.ru/services/container-registry), созданный также с помощью terraform.
+## Следующий этап - [Подготовка cистемы мониторинга и деплой приложения](../monitoring/README.md)
