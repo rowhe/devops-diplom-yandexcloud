@@ -32,7 +32,7 @@ resource "yandex_vpc_subnet" "subnet10_2" {
 
 resource "yandex_compute_image" "my_image" {
   description	= "Test image"
-  source_family	= "ubuntu-2004-lts"
+#  source_family	= "ubuntu-2004-lts"
   source_image = "fd81hgrcv6lsnkremf32"
   folder_id	= var.yc_folder_id
   min_disk_size	= 10
