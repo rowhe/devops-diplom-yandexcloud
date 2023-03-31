@@ -24,11 +24,11 @@ resource "yandex_vpc_subnet" "subnet10_1" {
   network_id     = yandex_vpc_network.diploma_network.id
 }
 
-resource "yandex_vpc_subnet" "subnet10_2" {
-  v4_cidr_blocks = ["10.1.0.0/16"]
-  zone           = var.yc_region_b
-  network_id     = yandex_vpc_network.diploma_network.id
-}
+//resource "yandex_vpc_subnet" "subnet10_2" {
+//  v4_cidr_blocks = ["10.1.0.0/16"]
+//  zone           = var.yc_region_b
+//  network_id     = yandex_vpc_network.diploma_network.id
+//}
 
 resource "yandex_compute_image" "my_image" {
   description	= "Test image"
@@ -148,7 +148,7 @@ resource "yandex_compute_instance" "node2" {
     }
   }
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet10_2.id
+    subnet_id = yandex_vpc_subnet.subnet10_1.id
     nat = true
   }
 
