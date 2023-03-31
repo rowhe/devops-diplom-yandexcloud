@@ -65,6 +65,7 @@ resource "yandex_compute_instance" "master" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet10_1.id
+    nat = true
   }
 
   metadata = {
