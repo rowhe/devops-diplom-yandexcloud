@@ -25,7 +25,7 @@ resource "yandex_vpc_subnet" "subnet10_1" {
 }
 
 resource "yandex_vpc_subnet" "subnet10_2" {
-  v4_cidr_blocks = ["10.2.0.0/16"]
+  v4_cidr_blocks = ["10.1.0.0/16"]
   zone           = var.yc_region_b
   network_id     = yandex_vpc_network.diploma_network.id
 }
