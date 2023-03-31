@@ -21,13 +21,13 @@ resource "yandex_vpc_network" "diploma_network" {
 resource "yandex_vpc_subnet" "subnet10_1" {
   v4_cidr_blocks = ["10.1.0.0/16"]
   zone           = var.yc_region_a
-  network_id     = "${yandex_vpc_network.diploma_network.id}"
+  network_id     = yandex_vpc_network.diploma_network.id
 }
 
 resource "yandex_vpc_subnet" "subnet10_2" {
   v4_cidr_blocks = ["10.2.0.0/16"]
   zone           = var.yc_region_b
-  network_id     = "${yandex_vpc_network.diploma_network.id}"
+  network_id     = yandex_vpc_network.diploma_network.id
 }
 
 resource "yandex_compute_image" "my_image" {
@@ -58,14 +58,13 @@ resource "yandex_compute_instance" "master" {
 
   boot_disk {
     initialize_params {
-      image_id	= "${yandex_compute_image.my_image.id}"
+      image_id	= yandex_compute_image.my_image.id
       size	= 30
     }
   }
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet10_1.id
-    nat       = true
   }
 
   metadata = {
@@ -106,7 +105,7 @@ resource "yandex_compute_instance" "node1" {
   
   boot_disk {
     initialize_params {
-      image_id	= "${yandex_compute_image.my_image.id}"
+      image_id	= yandex_compute_image.my_image.id
       size = 50
     }
   }
@@ -142,7 +141,7 @@ resource "yandex_compute_instance" "node2" {
   }
   boot_disk {
     initialize_params {
-      image_id = "${yandex_compute_image.my_image.id}"
+      image_id = yandex_compute_image.my_image.id
       size = 50
     }
   }
