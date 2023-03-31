@@ -87,6 +87,8 @@ locals {
   id_1 = toset([
   "a0",
   "a1",
+  "a2",
+  "a3",
   ])
 }
 
@@ -122,40 +124,40 @@ resource "yandex_compute_instance" "node1" {
   }
 }
 
-locals {
-  id_2 = toset([
-  "b0",
-  "b1",
-  ])
-}
-
-resource "yandex_compute_instance" "node2" {
-  for_each = local.id_2
-  name = "node-${each.key}-${terraform.workspace}"
-  zone = var.yc_region_b
-
-  lifecycle {
-    create_before_destroy = true
-    }
-  resources {
-    cores = 2
-    memory = 4
-  }
-  boot_disk {
-    initialize_params {
-      image_id = yandex_compute_image.my_image.id
-      size = 50
-    }
-  }
-  network_interface {
-    subnet_id = yandex_vpc_subnet.subnet10_1.id
-    nat = true
-  }
-
-  metadata = {
-    ssh_keys = "ubuntu:${file("./ssh/id_rsa.pub")}"
-  }
-}
+//locals {
+//  id_2 = toset([
+//  "b0",
+//  "b1",
+//  ])
+//}
+//
+//resource "yandex_compute_instance" "node2" {
+//  for_each = local.id_2
+//  name = "node-${each.key}-${terraform.workspace}"
+//  zone = var.yc_region_b
+//
+//  lifecycle {
+//    create_before_destroy = true
+//    }
+//  resources {
+//    cores = 2
+//    memory = 4
+//  }
+//  boot_disk {
+//    initialize_params {
+//      image_id = yandex_compute_image.my_image.id
+//      size = 50
+//    }
+//  }
+//  network_interface {
+//    subnet_id = yandex_vpc_subnet.subnet10_1.id
+//    nat = true
+//  }
+//
+//  metadata = {
+//    ssh_keys = "ubuntu:${file("./ssh/id_rsa.pub")}"
+//  }
+//}
 
 
 
