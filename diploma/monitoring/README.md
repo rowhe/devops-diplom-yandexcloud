@@ -278,6 +278,9 @@ Forwarding from [::1]:9093 -> 9093
 
 ### Подключимся к `grafana` по адресу `localhost:3000`
 
+
+![grafana_login](img/img_5.png)
+
 ![grafana_welcome](img/img.png)
 
 ### Проверим, что статистика кластера собирается 
