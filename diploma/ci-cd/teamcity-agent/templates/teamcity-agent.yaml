@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teamcity-agent
+spec:
+  selector:
+    matchLabels:
+      app: teamcity-agent
+  template:
+    metadata:
+      labels:
+        app: teamcity-agent
+    spec:
+      containers:
+        - name: teamcity-agent
+          image: "{{.Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: teamcity-agent
+spec:
+  type: NodePort
+  ports:
+  - port: {{ .Values.service.port }}
+    nodePort: {{ .Values.service.nodePort }}
+  selector:
+    app: teamcity-agent
+---
