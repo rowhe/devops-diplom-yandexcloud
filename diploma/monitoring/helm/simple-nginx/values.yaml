@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: rowhe/nginx_static_index
-  tag: "0.0.2"
+  tag: "0.0.3"
 service:
   type: NodePort
   port: 80
