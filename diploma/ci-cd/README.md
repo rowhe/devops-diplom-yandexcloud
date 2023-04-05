@@ -297,21 +297,30 @@ ubuntu@teamcity:~/teamcity-docker-samples/compose-ubuntu$
 ![project_add](img/img_4.png)
 
 
-10. Установим `git`, `kubectl` и перенесем конфиг .kube/config из кластера на агенты
+10. Установим [`git`](https://git-scm.com/), [`helm`](https://helm.sh/) [`kubectl`](https://kubernetes.io/docs/tasks/tools/) и перенесем конфиг `.kube/config` из кластера на агенты
 
 ```shell
-ubuntu@teamcity:~$ sudo docker exec -it c5c882b3cf59 sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+$ sudo docker exec -it c5c882b3cf59 sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100 45.8M  100 45.8M    0     0  21.6M      0  0:00:02  0:00:02 --:--:-- 21.6M
-ubuntu@teamcity:~$ sudo docker exec -it c5c882b3cf59 sudo chmod +x kubectl
-ubuntu@teamcity:~$ sudo docker exec -it c5c882b3cf59 sudo mv kubectl /usr/local/bin/
+$ sudo docker exec -it c5c882b3cf59 sudo chmod +x kubectl
+$ sudo docker exec -it c5c882b3cf59 sudo mv kubectl /usr/local/bin/
 
-ubuntu@teamcity:~$ sudo docker exec -it c5c882b3cf59 sudo apt install git
+$ sudo docker exec -it c5c882b3cf59 sudo apt install git
 Reading package lists... Done
 Building dependency tree
 Reading state information... Done
 ...
 Setting up git (1:2.25.1-1ubuntu3.10) ...
+
+$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+$ chmod 700 get_helm.sh
+$ ./get_helm.sh
+Downloading https://get.helm.sh/helm-v3.11.2-linux-amd64.tar.gz
+Verifying checksum... Done.
+Preparing to install helm into /usr/local/bin
+helm installed into /usr/local/bin/helm
 ```
+
 

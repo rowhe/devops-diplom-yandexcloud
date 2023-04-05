@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: rowhe/nginx_static_index
+  tag: "0.0.2"
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30001
