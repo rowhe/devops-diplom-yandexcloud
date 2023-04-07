@@ -296,6 +296,9 @@ ubuntu@teamcity:~/teamcity-docker-samples/compose-ubuntu$
 
 ![project_add](img/img_4.png)
 
+10. Добавим _connection_ для подключения к регистри docker.io
+
+![docker_connection](img/img_5.png)
 
 10. Установим [`git`](https://git-scm.com/), [`helm`](https://helm.sh/) [`kubectl`](https://kubernetes.io/docs/tasks/tools/) и перенесем конфиг `.kube/config` из кластера на агенты
 
