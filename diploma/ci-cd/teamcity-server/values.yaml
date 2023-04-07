@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: jetbrains/teamcity-server
+  tag: "latest"
+service:
+  type: NodePort
+  port: 8111
+  nodePort: 30111

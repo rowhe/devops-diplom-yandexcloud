@@ -1,0 +1,8 @@
+replicaCount: 3
+image:
+  repository: jetbrains/teamcity-agent
+  tag: "latest"
+service:
+  type: NodePort
+  port: 9090
+  nodePort: 30090
