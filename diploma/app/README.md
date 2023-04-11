@@ -65,7 +65,6 @@ d280bc8e13e2: Mounted from library/nginx
 
 ![DockerHub](img/img.png)
 
-
 4. Запустим контейнер и проверим его работу
 
 ```shell
