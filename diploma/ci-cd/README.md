@@ -7,12 +7,14 @@
    
     * Добавляем инстансу 4 cpu, 4Gb RAM и 50Gb диск
     * Также не забывает добавить ключ ssh для подключения извне
+    * Следует отметить, что данный хост следует создавать в отдельных от созданных на [первом этапе](diploma/terraform/README.md) при помощи _Terraform_ vpc и subnet YandexCloud     
 
+  
 ![instance](img/img.png)
 
 ![instance_provisioning](img/img_1.png)
 
-2. Для запуска сервера и агентов [`Teamcity`](https://www.jetbrains.com/teamcity/) будем использовать готовые [`docker-compose`](https://docs.docker.com/compose/) манифесты 
+2. Для запуска сервера и агентов [`Teamcity`](https://www.jetbrains.com/teamcity/) будем использовать готовый [`docker-compose`](https://github.com/rowhe/teamcity-docker-samples.git) манифест 
    
    * Подключаемся и устанавливаем [`docker`](https://www.docker.com/), [`docker-compose`](https://docs.docker.com/compose/)
 
@@ -252,6 +254,13 @@ ubuntu@teamcity:~$
 ```shell
 ubuntu@teamcity:~$ sudo usermod -aG docker ubuntu
 ubuntu@teamcity:~$ ^D
+```
+
+4.1 Для работы `kubectl` c нашим кластером добавим в `docker-compose.yml` подключение раздела с `.kube/config`
+
+```shell
+volumes:
+      - ~/.kube:/home/buildagent/.kube
 ```
 
 5. Запускаем контейнеры предварительно изменив пользователя и пароль к ДБ в манифесте `docker-compose.yaml`
