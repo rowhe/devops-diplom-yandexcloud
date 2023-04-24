@@ -44,7 +44,7 @@ locals {
   instance = {
     default	= 0
     prod	= 2
-    stage	= 2
+    stage	= 1
   }
 }
 
@@ -84,7 +84,6 @@ resource "yandex_compute_instance" "master1" {
 #   }
   count 	= local.instance[terraform.workspace]
 }
-
 
 resource "yandex_compute_instance" "master2" {
   name = "cp2-${count.index}-${terraform.workspace}"
