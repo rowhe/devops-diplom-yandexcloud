@@ -44,14 +44,15 @@ locals {
   instance = {
     default	= 0
     prod	= 2
-    stage	= 1
+    stage	= 2
   }
 }
 
-resource "yandex_compute_instance" "master" {
-  name = "cp-${count.index}-${terraform.workspace}"
+resource "yandex_compute_instance" "master1" {
+  name = "cp1-${count.index}-${terraform.workspace}"
 #  zone = "ru-central1-a"
   zone = var.yc_region_a
+  hostname = "cp1-${count.index}-${terraform.workspace}"
 
   resources {
     cores  = 4
@@ -67,6 +68,44 @@ resource "yandex_compute_instance" "master" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet10_1.id
+    nat = true
+  }
+
+  metadata = {
+    ssh-keys = "${var.ssh_user}:${file("./ssh/id_rsa.pub")}"
+  }
+
+#  connection {
+#      type        = "ssh"
+#      host        = self.public_ip
+#      user        = "dpopov"
+#      private_key = file("~/.ssh/id_rsa")
+#      timeout     = "4m"
+#   }
+  count 	= local.instance[terraform.workspace]
+}
+
+
+resource "yandex_compute_instance" "master2" {
+  name = "cp2-${count.index}-${terraform.workspace}"
+#  zone = "ru-central1-a"
+  zone = var.yc_region_b
+  hostname = "cp2-${count.index}-${terraform.workspace}"
+
+  resources {
+    cores  = 4
+    memory = 8
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id	= yandex_compute_image.my_image.id
+      size	= 25
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.subnet10_2.id
     nat = true
   }
 
