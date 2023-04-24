@@ -61,7 +61,7 @@ resource "yandex_compute_instance" "master" {
   boot_disk {
     initialize_params {
       image_id	= yandex_compute_image.my_image.id
-      size	= 30
+      size	= 25
     }
   }
 
@@ -88,7 +88,6 @@ locals {
   id_1 = toset([
   "a0",
   "a1",
-  "a2",
   ])
 }
 
@@ -110,7 +109,7 @@ resource "yandex_compute_instance" "node1" {
   boot_disk {
     initialize_params {
       image_id	= yandex_compute_image.my_image.id
-      size = 50
+      size = 25
     }
   }
 
@@ -146,7 +145,7 @@ resource "yandex_compute_instance" "node2" {
   boot_disk {
     initialize_params {
       image_id = yandex_compute_image.my_image.id
-      size = 50
+      size = 25
     }
   }
   network_interface {
