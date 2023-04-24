@@ -95,6 +95,7 @@ resource "yandex_compute_instance" "node2" {
   for_each = local.id_2
   name = "node-${each.key}-${terraform.workspace}"
   zone = var.yc_region_b
+  hostname = "node-${each.key}-${terraform.workspace}"
 
   lifecycle {
     create_before_destroy = true
@@ -115,7 +116,8 @@ resource "yandex_compute_instance" "node2" {
   }
 
   metadata = {
-    ssh_keys = "ubuntu:${file("./ssh/id_rsa.pub")}"
+#    ssh_keys = "ubuntu:${file("./ssh/id_rsa.pub")}"
+    ssh-keys = "${var.ssh_user}:${file("./ssh/id_rsa.pub")}"
   }
 }
 
@@ -131,6 +133,7 @@ resource "yandex_compute_instance" "node1" {
   for_each	= local.id_1
   name		= "node-${each.key}-${terraform.workspace}"
   zone = var.yc_region_a
+  hostname = "node-${each.key}-${terraform.workspace}"
   
   lifecycle {
     create_before_destroy = true
@@ -154,7 +157,8 @@ resource "yandex_compute_instance" "node1" {
   }
   
   metadata = {
-    ssh-keys = "ubuntu:${file("./ssh/id_rsa.pub")}"
+#    ssh-keys = "ubuntu:${file("./ssh/id_rsa.pub")}"
+    ssh-keys = "${var.ssh_user}:${file:(".ssh/id_rsa.pub")}"
   }
 }
 
