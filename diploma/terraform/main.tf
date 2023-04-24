@@ -158,7 +158,7 @@ resource "yandex_compute_instance" "node1" {
   
   metadata = {
 #    ssh-keys = "ubuntu:${file("./ssh/id_rsa.pub")}"
-    ssh-keys = "${var.ssh_user}:${file:(".ssh/id_rsa.pub")}"
+    ssh-keys = "${var.ssh_user}:${file("./ssh/id_rsa.pub")}"
   }
 }
 
