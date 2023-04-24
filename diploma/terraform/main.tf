@@ -162,7 +162,6 @@ resource "yandex_compute_instance" "node1" {
   }
 }
 
-
 //// Create SA
 //resource "yandex_iam_service_account" "sa" {
 //  folder_id = "${var.yc_folder_id}"
