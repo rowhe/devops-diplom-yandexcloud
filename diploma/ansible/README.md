@@ -1,16 +1,16 @@
 ## Этап второй - Создание Kubernetes кластера
 
-На данном этапе необходимо развернуть `Kubernetes` кластер, для данной задачи я буду использовать `Kubespray`
+На данном этапе необходимо развернуть `Kubernetes` кластер, для данной задачи будем использовать набор конфигураций _Ansible_ [`Kubespray`](https://github.com/kubernetes-sigs/kubespray)
 
-1. Клонирую `kubespray` командой `git clone https://github.com/kubernetes-sigs/kubespray`
-2. Создаю конфигурацию своего кластера:
+1. Клонирем `kubespray` командой `git clone https://github.com/kubernetes-sigs/kubespray`
+2. Создаем конфигурацию своего кластера:
 
 ```shell
 cd kubespray
 cp inventory/sample inventory/netology
 ```
 
-3. Выясняю айпи машин кластера на которые буду производить установку:
+3. Выясняем айпи машин кластера на которые будет производится установка:
 
 ![instances](img/img_1.png)
 
