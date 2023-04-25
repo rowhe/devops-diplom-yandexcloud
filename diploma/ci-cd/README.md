@@ -256,11 +256,18 @@ ubuntu@teamcity:~$ sudo usermod -aG docker ubuntu
 ubuntu@teamcity:~$ ^D
 ```
 
-4.1 Для работы `kubectl` c нашим кластером добавим в `docker-compose.yml` подключение раздела с `.kube/config`
+4.1 Для работы `kubectl` c нашим кластером добавим в `docker-compose.yml` подключение раздела с `~/.kube/config` и `~/.ssh/`
 
 ```shell
 volumes:
       - ~/.kube:/home/buildagent/.kube
+      - ~/.ssh:/home/buildagent/.ssh
+```
+
+4.2 Также на агенты будет необходимо установить и сконфигурировать утилиту `yc` для получения актуальных айпи инстансов _YandexCloud_ 
+
+```shell
+curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
 ```
 
 5. Запускаем контейнеры предварительно изменив пользователя и пароль к ДБ в манифесте `docker-compose.yaml`
