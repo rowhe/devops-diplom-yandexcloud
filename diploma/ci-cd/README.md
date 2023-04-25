@@ -342,4 +342,9 @@ Preparing to install helm into /usr/local/bin
 helm installed into /usr/local/bin/helm
 ```
 
+11. Создадим отдельный проект для сборки образа и пуша имиджа нашего приложения в регистри
 
+
+
+
+12. Создадим отдельный проект для сборки, пуша в регистри и деплоя в кластер _Kubernetes_
