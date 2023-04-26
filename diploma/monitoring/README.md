@@ -16,7 +16,7 @@ Resolving deltas: 100% (11779/11779), done.
 
 ```
 
-Выполним необходимые команды для установки мониторинка в [подготовленный](../terraform/README.md) в YandexCloud [кластер](../ansible/README.md) `Kubernetes`
+Выполним необходимые команды для установки мониторинга в [подготовленный](../terraform/README.md) в YandexCloud [кластер](../ansible/README.md) `Kubernetes`
 
 ```shell
 dpopov@dpopov-test:~$ cd kube-prometheus/

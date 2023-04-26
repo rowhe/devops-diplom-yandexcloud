@@ -1,12 +1,12 @@
-## Этап пятый (последный) -Установка и настройка системы CI/CD
+## Этап пятый (последный) - Установка и настройка системы CI/CD
 
 
-В качестве ситемы CI/CD будем использовать [`TeamCity`](https://www.jetbrains.com/teamcity/) на отдельном от кластера Kubernetes инстансе в YandexCloud
+В качестве системы CI/CD будем использовать [`TeamCity`](https://www.jetbrains.com/teamcity/) на отдельном от кластера Kubernetes инстансе в YandexCloud
 
 1. Запускаем дополнительный инстанс в Yandex-cloud:
    
     * Добавляем инстансу 4 cpu, 4Gb RAM и 50Gb диск
-    * Также не забывает добавить ключ ssh для подключения извне
+    * Также не забываем добавить ключ ssh для подключения извне
     * Следует отметить, что данный хост следует создавать в отдельных от созданных на [первом этапе](diploma/terraform/README.md) при помощи _Terraform_ vpc и subnet YandexCloud     
 
   
@@ -28,7 +28,7 @@ ubuntu@teamcity:~$ sudo apt update & sudo apt install -y git docker docker-compo
 ```
 
 <details>
-   <summary>Log</summary>
+   <summary>Install log</summary>
 
 ```shell
 ubuntu@teamcity:~$ sudo apt update & sudo apt install -y git docker docker-compose htop
@@ -350,7 +350,7 @@ helm installed into /usr/local/bin/helm
 
 ![first_vsd](img/img_7.png)
 
-В второй конфигурации для сборки, пуша по тэгам будем использовать другую конфигурацию
+В второй конфигурации для сборки, пуша по тэгам будем использовать другую конфигурацию. <br>
 В ней необходимо указать спецификацию бранча и включить функцию "Use tags as branches" 
 
 ![tags_vsc](img/img_8.png)
@@ -359,7 +359,7 @@ helm installed into /usr/local/bin/helm
 
 ![build_configs](img/img_9.png )
 
-В билд конфигурации _Docker build + push_ добавляем триггер, который позволит ограничить запуск билд-процесса директорией где находится конфигурация нашего вэб-приложения
+В билд конфигурации _Docker build + push_ добавляем триггер, который позволит ограничить срабатывание триггера и запуск билд-процесса директорией где находится конфигурация нашего вэб-приложения
 
 ![trigger1](img/img_10.png)
 
@@ -382,7 +382,7 @@ helm installed into /usr/local/bin/helm
 ![image_push](img/img_12.png)
 
 
-Теперь проверим работу билд-конфигурации запустив билд по триггеру
+Теперь проверим работу билд-конфигурации сделав коммит и пуш в репозиторий таким образом запустив сборку по триггеру
 
 <details>
 <summary>Build log</summary>
@@ -774,10 +774,10 @@ sudo helm --kubeconfig ~/.kube/config upgrade --install simple-nginx simple-ngin
 
 ## Итог проделанной работы:
 
-1. [Cоздана облачная инфраструктыра](terraform/README.md) на базе YandexCloud
+1. [Cоздана облачная инфраструктура](terraform/README.md) на базе YandexCloud
 2. [Запущен](ansible/README.md) Kubernetes кластер
 3. [Подготовлено](app/README.md) тестовое приложение
-4. [Установлен](monitoring/README.md) мониторинг и запущено [деплой](monitoring/README.md) тестовое приложение
+4. [Установлен](monitoring/README.md) мониторинг кластера и запущено [деплой](monitoring/README.md) тестовое приложение
 5. [Установлена и настроена](ci-cd/README.md) система CI/CD
 
-# Вывод - задачи дипломной работы выполенены в полном объеме
+# Вывод - задачи дипломной работы выполнены в полном объеме
