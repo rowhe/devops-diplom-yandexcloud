@@ -21,3 +21,11 @@ variable "yc_region_b" {
 variable "ssh_user" {
   default = ""
 }
+
+variable "tfstate_key_id" {
+  default = ""
+}
+
+variable "tfstate_key" {
+  default = ""
+}
