@@ -16,7 +16,7 @@
 
 - main.tf
 
-```json
+```terraform
 terraform {
   required_providers {
     yandex = {
