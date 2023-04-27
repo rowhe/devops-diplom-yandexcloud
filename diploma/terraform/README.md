@@ -222,7 +222,7 @@ resource "yandex_compute_instance" "node1" {
 
 - vars.tf
 
-```text
+```terraform
 variable "yc_token" {
    default = ""
 }
@@ -259,7 +259,7 @@ variable "tfstate_key" {
 
 - Создадим файл конфигурации бэкэнда `backend.tf`
 
-```text
+```terraform
 terraform {
   backend "s3" {}
 }
@@ -267,7 +267,7 @@ terraform {
 
 - Вынесем конфигурацию бэкэнда в отдельный файл `backend.conf` и обязательно добавим его в `.gitignore`
 
-```text
+```terraform
 endpoint   = "storage.yandexcloud.net"
 bucket     = "diploma-tf-bucket"
 region     = "ru-central1-a"
