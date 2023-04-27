@@ -1,4 +1,4 @@
 .idea*
 .env*
 .terraform*
-*backend.conf
+backend.conf
