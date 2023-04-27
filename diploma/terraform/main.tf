@@ -4,6 +4,16 @@ terraform {
       source = "yandex-cloud/yandex"
     }
   }
+  backend "s3" {
+    endpoint   = "storage.yandexcloud.net"
+    bucket     = "diploma-tf-bucket"
+    region     = "ru-central1"
+    key        = "terraform/main.tfstate"
+    token = "var.yc_token"
+
+    skip_region_validation      = true
+    skip_credentials_validation = true
+  }
   required_version = ">= 0.13"
 }
 
